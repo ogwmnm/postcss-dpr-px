@@ -1,6 +1,6 @@
 {
   "name": "postcss-dpr-px",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "PostCSS plugin to replace value in px with new value for device pixel ratio.",
   "keywords": [
     "postcss",
