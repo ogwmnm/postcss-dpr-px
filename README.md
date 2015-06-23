@@ -31,6 +31,8 @@ postcss([ require( "postcss-dprpx" ) ])
 
 #### `dpr` (default: 1)
 
+#### `rounding` (default: "round")
+
 See [PostCSS] docs for examples for your environment.
 
 ## [Changelog](CHANGELOG.md)
