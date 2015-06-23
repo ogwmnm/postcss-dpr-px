@@ -31,6 +31,7 @@ module.exports = postcss.plugin( "postcss-dpr-px", function( opts ) {
     break;
   default:
     rounding = "round";
+    break;
   }
 
   return function( css ) {
@@ -42,7 +43,10 @@ module.exports = postcss.plugin( "postcss-dpr-px", function( opts ) {
       if ( value.indexOf( "px" ) === -1 ) {
         return;
       }
-      if ( ignoredProps.indexOf( prop ) > -1 ) {
+      if ( typeof ignoredProps === "object" && ignoredProps.indexOf( prop ) > -1 ) {
+        return;
+      }
+      if ( typeof ignoredProps === "function" && ignoredProps( prop ) ) {
         return;
       }
 

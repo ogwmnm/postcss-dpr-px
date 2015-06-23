@@ -56,4 +56,10 @@ describe( "postcss-dpr-px", function () {
   it( "should do nothing for prop specified in ignored prop option.", function( done ) {
     test( "a{ width: 24px; }", "a{ width: 24px; }", { dpr: 1.5, ignoredProps: [ "width" ]}, done );
   });
+
+  it( "should do nothing for prop specified in ignored prop option (function).", function( done ) {
+    test( "a{ width: 24px; }", "a{ width: 24px; }", { dpr: 1.5, ignoredProps: function( prop ) {
+      return prop.indexOf( "width" ) > -1;
+    }}, done );
+  });
 });
