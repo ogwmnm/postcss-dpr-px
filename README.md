@@ -24,7 +24,7 @@ For device pixel ratio 1.5:
 ## Usage
 
 ```js
-postcss([ require( "postcss-dprpx" ) ])
+postcss([ require( "postcss-dpr-px" ) ])
 ```
 
 ### Options
@@ -32,6 +32,8 @@ postcss([ require( "postcss-dprpx" ) ])
 #### `dpr` (default: 1)
 
 #### `rounding` (default: "round")
+
+#### `permitZero` (default: true)
 
 See [PostCSS] docs for examples for your environment.
 

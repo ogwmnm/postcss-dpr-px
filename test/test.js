@@ -40,4 +40,16 @@ describe( "postcss-dpr-px", function () {
   it( "should do nothing with invalid dpr options.", function( done ) {
     test( "a{ width: 24px; }", "a{ width: 24px; }", { dpr: "foo" }, done );
   });
+
+  it( "should do nothing for zero.", function( done ) {
+    test( "a{ width: 0px; }", "a{ width: 0px; }", { dpr: 1.5 }, done );
+  });
+
+  it( "should ceil value less than 1 with permitZero false", function( done ) {
+    test( "a{ width: 1px; }", "a{ width: 1px; }", { dpr: 1.5, permitZero: false }, done );
+  });
+
+  it( "should not ceil value less than 1 with permitZero true", function( done ) {
+    test( "a{ width: 1px; }", "a{ width: 0.67px; }", { dpr: 1.5, permitZero: true }, done );
+  });
 });

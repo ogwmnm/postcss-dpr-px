@@ -5,11 +5,22 @@ function round( type, unit, precision ) {
   return Math[ type ]( unit * p ) / p;
 }
 
+function sign( x ) {
+  if ( x > 0 ) {
+    return 1;
+  } else if ( x < 0 ) {
+    return -1;
+  } else {
+    return 0;
+  }
+}
+
 module.exports = postcss.plugin( "postcss-dpr-px", function( opts ) {
-  var dpr, rounding;
+  var dpr, rounding, permitZero;
 
   opts = opts || {};
   dpr = typeof opts.dpr === "number" ? opts.dpr : 1;
+  permitZero = opts.permitZero === true;
 
   switch( opts.rounding ) {
   case "round":
@@ -31,7 +42,11 @@ module.exports = postcss.plugin( "postcss-dpr-px", function( opts ) {
       }
 
       newValue = value.replace( /(\d*\.?\d+)px/ig, function( match, p1 ) {
-        return round( rounding, p1 / dpr, 2 ) + "px";
+        var result = round( rounding, p1 / dpr, 2 );
+        if ( permitZero === false && result < 1 && result > -1 ) {
+          result = sign( result ) * Math.ceil( Math.abs( result ));
+        }
+        return result + "px";
       });
 
       decl.value = newValue;
