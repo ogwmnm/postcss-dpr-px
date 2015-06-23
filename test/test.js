@@ -52,4 +52,8 @@ describe( "postcss-dpr-px", function () {
   it( "should not ceil value less than 1 with permitZero true", function( done ) {
     test( "a{ width: 1px; }", "a{ width: 0.67px; }", { dpr: 1.5, permitZero: true }, done );
   });
+
+  it( "should do nothing for prop specified in ignored prop option.", function( done ) {
+    test( "a{ width: 24px; }", "a{ width: 24px; }", { dpr: 1.5, ignoredProps: [ "width" ]}, done );
+  });
 });

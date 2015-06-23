@@ -16,11 +16,12 @@ function sign( x ) {
 }
 
 module.exports = postcss.plugin( "postcss-dpr-px", function( opts ) {
-  var dpr, rounding, permitZero;
+  var dpr, rounding, permitZero, ignoredProps;
 
   opts = opts || {};
   dpr = typeof opts.dpr === "number" ? opts.dpr : 1;
   permitZero = opts.permitZero === true;
+  ignoredProps = opts.ignoredProps || [];
 
   switch( opts.rounding ) {
   case "round":
@@ -35,9 +36,13 @@ module.exports = postcss.plugin( "postcss-dpr-px", function( opts ) {
   return function( css ) {
     css.eachDecl( function( decl ) {
       var newValue,
+          prop = decl.prop,
           value = decl.value;
 
       if ( value.indexOf( "px" ) === -1 ) {
+        return;
+      }
+      if ( ignoredProps.indexOf( prop ) > -1 ) {
         return;
       }
 
