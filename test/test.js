@@ -17,8 +17,16 @@ describe( "postcss-dpr-px", function () {
     test( "a{ width: 24px; }", "a{ width: 16px; }", { dpr: 1.5 }, done );
   });
 
-  it( "should round value which cannot be devided by dpr to the hundredth place.", function( done ) {
-    test( "a{ width: 28px; }", "a{ width: 18.66px; }", { dpr: 1.5 }, done );
+  it( "should round value which cannot be devided by dpr to the hundredth place without rounding option.", function( done ) {
+    test( "a{ width: 28px; }", "a{ width: 18.67px; }", { dpr: 1.5 }, done );
+  });
+
+  it( "should floor value which cannot be devided by dpr to the hundredth place with floor option.", function( done ) {
+    test( "a{ width: 28px; }", "a{ width: 18.66px; }", { dpr: 1.5, rounding: "floor" }, done );
+  });
+
+  it( "should ceil value which cannot be devided by dpr to the hundredth place with ceil option.", function( done ) {
+    test( "a{ width: 28px; }", "a{ width: 18.67px; }", { dpr: 1.5, rounding: "ceil" }, done );
   });
 
   it( "should replace multiple values in px.", function( done ) {
