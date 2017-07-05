@@ -35,7 +35,7 @@ module.exports = postcss.plugin( "postcss-dpr-px", function( opts ) {
   }
 
   return function( css ) {
-    css.eachDecl( function( decl ) {
+    css.walkDecls( function( decl ) {
       var newValue,
           prop = decl.prop,
           value = decl.value;
